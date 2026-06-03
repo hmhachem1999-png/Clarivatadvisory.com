@@ -10,8 +10,9 @@
   --color-ink-soft: #0f151b;
   --color-paper: #f4f4f0;
   --color-muted: #9aa6ad;
-  --color-teal: #0fb5ba;
-  --color-cyan: #19e0c8;
+  /* Accent gradient — gold (token names kept for cascade simplicity) */
+  --color-teal: #c8a13a;
+  --color-cyan: #f2cd5c;
 
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 

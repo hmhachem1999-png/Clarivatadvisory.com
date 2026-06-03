@@ -81,7 +81,7 @@ export default function Contact() {
 
           {/* Styled map placeholder */}
           <div className="relative mt-12 h-48 overflow-hidden rounded-3xl border border-white/10 bg-ink-soft">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(15,181,186,0.25),transparent_60%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(200,161,58,0.25),transparent_60%)]" />
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:32px_32px]" />
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
               <MapPin className="mx-auto h-7 w-7 text-cyan" />
