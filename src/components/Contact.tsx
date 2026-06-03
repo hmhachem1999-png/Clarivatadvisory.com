@@ -8,10 +8,22 @@ import { Reveal } from "./RevealText";
 
 type Errors = { name?: string; email?: string; message?: string };
 
+// Netlify Forms identifier — must match the form's `name` and the hidden
+// `form-name` input. Submissions land in the Netlify dashboard; set up an
+// email notification there to forward them to clarivatfzllc@gmail.com.
+const FORM_NAME = "contact";
+
+const encode = (data: Record<string, string>) =>
+  Object.keys(data)
+    .map((k) => encodeURIComponent(k) + "=" + encodeURIComponent(data[k]))
+    .join("&");
+
 export default function Contact() {
   const [values, setValues] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const validate = (): Errors => {
     const next: Errors = {};
@@ -26,13 +38,30 @@ export default function Contact() {
     return next;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError(null);
     const next = validate();
     setErrors(next);
-    if (Object.keys(next).length === 0) {
-      // No backend wired up — replace with a real endpoint (see README).
+    if (Object.keys(next).length > 0) return;
+
+    setSubmitting(true);
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({ "form-name": FORM_NAME, ...values }),
+      });
+      if (!res.ok) throw new Error(`Request failed (${res.status})`);
       setSent(true);
+    } catch {
+      setSubmitError(
+        "Something went wrong sending your message. Please email us directly at " +
+          company.email +
+          "."
+      );
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -121,13 +150,31 @@ export default function Contact() {
               </button>
             </motion.div>
           ) : (
-            <form onSubmit={handleSubmit} noValidate className="space-y-5">
+            <form
+              name={FORM_NAME}
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              onSubmit={handleSubmit}
+              noValidate
+              className="space-y-5"
+            >
+              {/* Netlify Forms plumbing */}
+              <input type="hidden" name="form-name" value={FORM_NAME} />
+              <p className="hidden">
+                <label>
+                  Don&apos;t fill this out if you&apos;re human:{" "}
+                  <input name="bot-field" />
+                </label>
+              </p>
+
               <div>
                 <label htmlFor="name" className="sr-only">
                   Name
                 </label>
                 <input
                   id="name"
+                  name="name"
                   type="text"
                   placeholder="Your name"
                   value={values.name}
@@ -146,6 +193,7 @@ export default function Contact() {
                 </label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
                   placeholder="Email address"
                   value={values.email}
@@ -164,6 +212,7 @@ export default function Contact() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={6}
                   placeholder="How can we help?"
                   value={values.message}
@@ -178,10 +227,14 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="group w-full rounded-full bg-gradient-to-r from-teal to-cyan px-8 py-4 text-base font-bold text-ink transition-transform duration-300 hover:scale-[1.02]"
+                disabled={submitting}
+                className="group w-full rounded-full bg-gradient-to-r from-teal to-cyan px-8 py-4 text-base font-bold text-ink transition-transform duration-300 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Send message
+                {submitting ? "Sending…" : "Send message"}
               </button>
+              {submitError && (
+                <p className="text-center text-sm text-red-400">{submitError}</p>
+              )}
               <p className="text-center text-xs text-paper/40">
                 We&apos;ll never share your details.
               </p>

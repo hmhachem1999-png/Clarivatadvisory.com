@@ -1,0 +1,10 @@
+# Netlify build configuration.
+# The site is a Next.js static export (output: "export" in next.config.ts),
+# so we publish the generated ./out folder as plain static files. This also
+# lets Netlify Forms detect the contact form in the exported HTML.
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "20"
