@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "PowerShell($env:Path = \"C:\\\\Program Files\\\\nodejs;\" + $env:Path; npm install framer-motion lenis lucide-react)",
+      "PowerShell($base = \"C:\\\\Users\\\\husse\\\\OneDrive\\\\Desktop\\\\Claude assist\\\\node_modules\\\\lucide-react\\\\dist\\\\esm\\\\icons\"; $names = @\\(\"calculator\",\"receipt\",\"clipboard-list\",\"line-chart\",\"file-check-2\",\"building-2\",\"database\",\"monitor-smartphone\",\"arrow-up-right\",\"menu\",\"x\",\"check\",\"map-pin\",\"phone\",\"mail\",\"arrow-right\"\\); foreach \\($n in $names\\) { $p = Join-Path $base \"$n.js\"; if \\(Test-Path $p\\) { Write-Output \"OK  $n\" } else { Write-Output \"MISSING  $n\" } })",
+      "PowerShell($base = \"C:\\\\Users\\\\husse\\\\OneDrive\\\\Desktop\\\\Claude assist\\\\node_modules\\\\lucide-react\"; Get-ChildItem $base | Select-Object Name; Write-Output \"---dist---\"; if \\(Test-Path \"$base\\\\dist\"\\) { Get-ChildItem \"$base\\\\dist\" | Select-Object Name }; Write-Output \"---package.json main/exports---\"; Get-Content \"$base\\\\package.json\" -TotalCount 60)",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}

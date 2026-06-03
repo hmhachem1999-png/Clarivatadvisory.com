@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------------
+   Brand theme tokens — edit these to re-skin the whole site.
+   Tailwind v4 picks these up automatically as utilities:
+   bg-ink, text-paper, text-teal, from-teal, to-cyan, etc.
+---------------------------------------------------------------------------- */
+@theme {
+  --color-ink: #0a0e12;
+  --color-ink-soft: #0f151b;
+  --color-paper: #f4f4f0;
+  --color-muted: #9aa6ad;
+  --color-teal: #0fb5ba;
+  --color-cyan: #19e0c8;
+
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--color-ink);
+  --color-foreground: var(--color-paper);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  /* Default cursor stays; custom cursor overlays on desktop pointer devices */
+  ::selection {
+    background-color: var(--color-cyan);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .gradient-text {
+    background-image: linear-gradient(
+      100deg,
+      var(--color-teal),
+      var(--color-cyan)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Animated link underline that wipes in from the left */
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Hero gradient blob
+---------------------------------------------------------------------------- */
+@keyframes blob-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(6%, -8%) scale(1.1);
+  }
+  66% {
+    transform: translate(-5%, 6%) scale(0.95);
+  }
+}
+
+.blob {
+  background: radial-gradient(
+    circle at 30% 30%,
+    var(--color-teal),
+    var(--color-cyan) 45%,
+    transparent 70%
+  );
+  filter: blur(80px);
+  animation: blob-drift 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* ----------------------------------------------------------------------------
+   Infinite marquee
+---------------------------------------------------------------------------- */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-scroll 28s linear infinite;
+  will-change: transform;
+}
+
+/* ----------------------------------------------------------------------------
+   Film grain overlay
+---------------------------------------------------------------------------- */
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ----------------------------------------------------------------------------
+   Custom cursor
+---------------------------------------------------------------------------- */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 70;
+  pointer-events: none;
+  border-radius: 9999px;
+  background-color: var(--color-cyan);
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cursor-active * {
+    cursor: none;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Reduced motion: kill the heavy stuff
+---------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .blob {
+    animation: none;
+  }
+  .marquee-track {
+    animation: none;
+  }
+}
