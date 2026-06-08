@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { brandStory, company } from "@/data/site";
-import RevealText, { Reveal } from "./RevealText";
+import { Reveal } from "./RevealText";
 
 export default function BrandStory() {
   return (
@@ -13,11 +13,11 @@ export default function BrandStory() {
         className="blob pointer-events-none absolute left-1/2 top-0 -z-10 h-[45vmax] w-[45vmax] -translate-x-1/2 -translate-y-1/3 opacity-10"
       />
 
-      <div className="mx-auto max-w-5xl text-center">
+      <div className="mx-auto max-w-4xl text-center">
         <Reveal>
           <Image
             src="/clarivat-mark.png"
-            alt={`${company.name} logo mark`}
+            alt={`${company.name} North Star logo mark`}
             width={96}
             height={96}
             className="mx-auto h-20 w-20 md:h-24 md:w-24"
@@ -26,32 +26,45 @@ export default function BrandStory() {
 
         <Reveal delay={0.05}>
           <p className="mt-8 text-sm font-semibold uppercase tracking-[0.3em] text-cyan">
-            Our story
+            Brand Story
           </p>
         </Reveal>
 
-        <RevealText
-          as="h2"
-          text={brandStory.lead}
-          stagger={0.035}
-          highlight={[5]}
-          className="mx-auto mt-6 block max-w-4xl text-[clamp(1.7rem,4vw,3.25rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
-        />
+        <Reveal delay={0.08}>
+          <p className="mx-auto mt-6 max-w-3xl text-[clamp(1.5rem,3.4vw,2.75rem)] font-extrabold leading-[1.15] tracking-[-0.02em]">
+            {brandStory.story}
+          </p>
+        </Reveal>
 
-        <div className="mx-auto mt-10 max-w-2xl space-y-6 text-left md:text-center">
-          {brandStory.paragraphs.map((p, i) => (
-            <Reveal key={i} delay={0.05 * i}>
-              <p className="text-lg leading-relaxed text-paper/70">{p}</p>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal delay={0.15}>
-          <p className="mt-12 text-xl font-bold tracking-tight md:text-2xl">
+        <Reveal delay={0.12}>
+          <p className="mt-10 text-xl font-bold tracking-tight md:text-2xl">
             <span className="gradient-text">Clarity today.</span>{" "}
             Confidence tomorrow.
           </p>
         </Reveal>
+      </div>
+
+      {/* The Mark */}
+      <div className="mx-auto mt-20 max-w-4xl border-t border-white/10 pt-16">
+        <div className="grid items-center gap-10 md:grid-cols-[auto_1fr] md:gap-16">
+          <Reveal className="flex justify-center">
+            <Image
+              src="/clarivat-mark.png"
+              alt={`${company.name} logo mark detail`}
+              width={160}
+              height={160}
+              className="h-28 w-28 md:h-40 md:w-40"
+            />
+          </Reveal>
+          <Reveal delay={0.08}>
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan">
+              The Mark
+            </p>
+            <p className="text-lg leading-relaxed text-paper/70">
+              {brandStory.mark}
+            </p>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

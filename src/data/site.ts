@@ -32,15 +32,11 @@ export const company = {
   license: "RAKEZ Free Zone Services Licence",
 };
 
-// The brand story — shown in its own section. Lead is the opening statement;
-// paragraphs follow.
+// The brand story — official copy, shown in its own section.
 export const brandStory = {
-  lead: "Clarivat was born from a simple belief: that clarity is the foundation of every confident decision.",
-  paragraphs: [
-    "The name says it — clarity, made visible. In a region moving fast, where regulation, tax and growth all change by the quarter, founders deserve a partner who turns financial complexity into something they can actually see and act on.",
-    "From our base in the Ras Al Khaimah Economic Zone, we sit beside ambitious UAE businesses as their accountants, tax advisors and setup partners — keeping every number accounted for and every obligation met, so nothing stands between you and your next move.",
-    "We measure our work not in spreadsheets filed, but in the confidence our clients carry into tomorrow. That is the promise behind everything we do: clarity today, confidence tomorrow.",
-  ],
+  story:
+    "Clarivat Advisory empowers organizations and leaders to navigate complexity with clarity and confidence. Guided by insight, precision, and foresight, we help our clients make informed decisions today that shape a stronger tomorrow.",
+  mark: "The abstract North Star symbolizes clarity, guidance, and direction. The flowing lines represent insight, precision, and forward thinking — illuminating the path to confident decisions.",
 };
 
 export type NavLink = { label: string; href: string };
