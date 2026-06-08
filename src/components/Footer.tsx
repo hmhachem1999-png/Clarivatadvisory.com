@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { company, navLinks, services } from "@/data/site";
 
 export default function Footer() {
@@ -8,12 +9,17 @@ export default function Footer() {
     <footer className="border-t border-white/10 bg-ink px-6 pt-20 pb-10 md:px-10">
       <div className="mx-auto max-w-7xl">
         {/* Big logotype */}
-        <Link
-          href="/"
-          className="block text-[clamp(3.5rem,14vw,12rem)] font-extrabold leading-none tracking-[-0.04em]"
-        >
-          {company.name}
-          <span className="gradient-text">.</span>
+        <Link href="/" className="flex items-center gap-4 md:gap-6">
+          <Image
+            src="/clarivat-mark.png"
+            alt={`${company.name} logo`}
+            width={120}
+            height={120}
+            className="h-[clamp(2.5rem,9vw,7rem)] w-auto"
+          />
+          <span className="text-[clamp(3.5rem,14vw,12rem)] font-extrabold leading-none tracking-[-0.04em]">
+            {company.name}
+          </span>
         </Link>
 
         <div className="mt-16 grid gap-12 border-t border-white/10 pt-12 md:grid-cols-[1.4fr_1fr_1fr]">

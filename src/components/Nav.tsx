@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { company, navLinks } from "@/data/site";
+import Logo from "./Logo";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,13 +35,8 @@ export default function Nav() {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-10">
-        <Link
-          href="/"
-          className="text-xl font-extrabold tracking-tight"
-          aria-label={`${company.name} home`}
-        >
-          {company.name}
-          <span className="gradient-text">.</span>
+        <Link href="/" aria-label={`${company.name} home`}>
+          <Logo markSize={28} />
         </Link>
 
         <ul className="hidden items-center gap-9 md:flex">
@@ -85,10 +81,7 @@ export default function Nav() {
             className="fixed inset-0 z-50 flex flex-col bg-ink md:hidden"
           >
             <div className="flex items-center justify-between px-6 py-5">
-              <span className="text-xl font-extrabold tracking-tight">
-                {company.name}
-                <span className="gradient-text">.</span>
-              </span>
+              <Logo markSize={28} />
               <button
                 type="button"
                 onClick={() => setOpen(false)}

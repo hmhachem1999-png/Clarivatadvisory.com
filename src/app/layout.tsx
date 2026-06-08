@@ -6,6 +6,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -43,6 +44,7 @@ export default function RootLayout({
           <Nav />
           <main>{children}</main>
           <Footer />
+          <WhatsAppButton />
         </SmoothScroll>
       </body>
     </html>

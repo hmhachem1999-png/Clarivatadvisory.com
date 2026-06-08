@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Check, Mail, MapPin, Phone } from "lucide-react";
 import { company } from "@/data/site";
 import { Reveal } from "./RevealText";
+import { WhatsAppIcon } from "./WhatsAppButton";
 
 type Errors = { name?: string; email?: string; message?: string };
 
@@ -106,20 +107,30 @@ export default function Contact() {
                 {company.email}
               </a>
             </ContactRow>
+            <ContactRow
+              icon={<WhatsAppIcon className="h-5 w-5" />}
+              label="WhatsApp"
+            >
+              <a
+                href={company.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-underline"
+              >
+                Chat with us instantly
+              </a>
+            </ContactRow>
           </div>
 
-          {/* Styled map placeholder */}
-          <div className="relative mt-12 h-48 overflow-hidden rounded-3xl border border-white/10 bg-ink-soft">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(200,161,58,0.25),transparent_60%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:32px_32px]" />
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-              <MapPin className="mx-auto h-7 w-7 text-cyan" />
-              <p className="mt-2 text-sm text-paper/70">
-                {company.address.city}, UAE
-              </p>
-              <p className="text-xs text-paper/40">Map embed goes here</p>
-            </div>
-          </div>
+          <a
+            href={company.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-12 inline-flex items-center gap-3 rounded-full bg-[#25D366] px-6 py-3.5 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-105"
+          >
+            <WhatsAppIcon className="h-5 w-5" />
+            Message us on WhatsApp
+          </a>
         </div>
 
         {/* Right: form / success state */}

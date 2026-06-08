@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import About from "@/components/About";
+import BrandStory from "@/components/BrandStory";
 import Process from "@/components/Process";
 import CTA from "@/components/CTA";
 
@@ -20,6 +21,7 @@ export default function AboutPage() {
         intro="A RAKEZ-licensed advisory firm built for founders who would rather build than chase compliance."
       />
       <About />
+      <BrandStory />
       <Process />
       <CTA />
     </>

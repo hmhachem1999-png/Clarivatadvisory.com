@@ -13,7 +13,7 @@ import {
 export const company = {
   name: "Clarivat",
   legalName: "Clarivat FZ-LLC",
-  tagline: "Clarity for your business.",
+  tagline: "Clarity today. Confidence tomorrow.",
   subline:
     "A RAKEZ-licensed advisory firm helping UAE companies stay compliant, tax-ready, and financially clear — from bookkeeping to corporate tax to business setup.",
   shortAbout:
@@ -21,6 +21,8 @@ export const company = {
   email: "info@clarivatadvisory.com",
   phone: "+971 55 527 6398",
   phoneHref: "tel:+971555276398",
+  // WhatsApp deep link (digits only, no +, spaces or dashes)
+  whatsapp: "https://wa.me/971555276398",
   address: {
     line1: "Compass Building",
     line2: "Al Hulaila Industrial Zone, RAKEZ",
@@ -30,12 +32,23 @@ export const company = {
   license: "RAKEZ Free Zone Services Licence",
 };
 
+// The brand story — shown in its own section. Lead is the opening statement;
+// paragraphs follow.
+export const brandStory = {
+  lead: "Clarivat was born from a simple belief: that clarity is the foundation of every confident decision.",
+  paragraphs: [
+    "The name says it — clarity, made visible. In a region moving fast, where regulation, tax and growth all change by the quarter, founders deserve a partner who turns financial complexity into something they can actually see and act on.",
+    "From our base in the Ras Al Khaimah Economic Zone, we sit beside ambitious UAE businesses as their accountants, tax advisors and setup partners — keeping every number accounted for and every obligation met, so nothing stands between you and your next move.",
+    "We measure our work not in spreadsheets filed, but in the confidence our clients carry into tomorrow. That is the promise behind everything we do: clarity today, confidence tomorrow.",
+  ],
+};
+
 export type NavLink = { label: string; href: string };
 
 export const navLinks: NavLink[] = [
   { label: "Services", href: "/#services" },
   { label: "About", href: "/#about" },
-  { label: "Process", href: "/#process" },
+  { label: "Story", href: "/#story" },
   { label: "Contact", href: "/#contact" },
 ];
 
