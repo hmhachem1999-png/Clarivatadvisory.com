@@ -114,6 +114,72 @@
 }
 
 /* ----------------------------------------------------------------------------
+   Rotating North Star mark (hero) — slow, elegant 360° rotation
+---------------------------------------------------------------------------- */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-slow {
+  animation: spin-slow 90s linear infinite;
+  will-change: transform;
+}
+
+/* Soft breathing glow behind the mark */
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.06);
+  }
+}
+
+.mark-glow {
+  background: radial-gradient(
+    circle,
+    rgba(200, 161, 58, 0.35),
+    rgba(242, 205, 92, 0.12) 45%,
+    transparent 70%
+  );
+  filter: blur(30px);
+  animation: glow-pulse 7s ease-in-out infinite;
+}
+
+/* ----------------------------------------------------------------------------
+   Constellation twinkle (hero background)
+---------------------------------------------------------------------------- */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+
+.twinkle {
+  animation: twinkle 5s ease-in-out infinite;
+}
+
+/* Subtle gradient hairline used as a section divider */
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(244, 244, 240, 0.16),
+    transparent
+  );
+}
+
+/* ----------------------------------------------------------------------------
    Infinite marquee
 ---------------------------------------------------------------------------- */
 @keyframes marquee-scroll {
@@ -180,6 +246,11 @@
     animation: none;
   }
   .marquee-track {
+    animation: none;
+  }
+  .spin-slow,
+  .mark-glow,
+  .twinkle {
     animation: none;
   }
 }

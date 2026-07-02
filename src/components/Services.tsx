@@ -1,16 +1,84 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import { services } from "@/data/site";
+import { ChevronDown } from "lucide-react";
+import { serviceCategories, services, type Service } from "@/data/site";
+
+function ServiceCard({ service, index }: { service: Service; index: number }) {
+  const [open, setOpen] = useState(false);
+  const Icon = service.icon;
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 26 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-6%" }}
+      transition={{
+        duration: 0.6,
+        delay: (index % 3) * 0.08,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      className="group relative rounded-3xl border border-white/10 bg-ink-soft p-8 transition-all duration-500 hover:-translate-y-1 hover:border-cyan/30 hover:shadow-[0_18px_50px_-18px_rgba(200,161,58,0.25)] md:p-9"
+    >
+      <div className="flex items-start justify-between gap-4">
+        <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-cyan transition-colors duration-500 group-hover:border-cyan/40">
+          <Icon className="h-[22px] w-[22px]" strokeWidth={1.25} />
+        </span>
+        <span className="text-sm font-semibold tabular-nums text-paper/30">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      </div>
+
+      <h4 className="mt-6 text-xl font-bold leading-snug tracking-tight md:text-2xl">
+        {service.title}
+      </h4>
+      <p className="mt-3 text-[0.95rem] leading-relaxed text-paper/60">
+        {service.description}
+      </p>
+
+      {/* Learn more — expands on hover, toggles on tap/keyboard */}
+      <motion.div
+        initial={false}
+        animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+        className="overflow-hidden"
+      >
+        <p className="border-t border-white/10 pt-4 mt-5 text-sm leading-relaxed text-paper/50">
+          {service.details}
+        </p>
+      </motion.div>
+
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-cyan/90 transition-colors hover:text-cyan"
+      >
+        {open ? "Show less" : "Learn more"}
+        <ChevronDown
+          className={`h-4 w-4 transition-transform duration-300 ${
+            open ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+    </motion.article>
+  );
+}
 
 export default function Services() {
+  let counter = 0;
+
   return (
     <section
       id="services"
       className="mx-auto max-w-7xl scroll-mt-24 px-6 py-24 md:px-10 md:py-40"
     >
-      <div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+      <div className="hairline mb-16 md:mb-24" />
+
+      <div className="mb-16 flex flex-col justify-between gap-6 md:mb-20 md:flex-row md:items-end">
         <div>
           <p className="mb-5 text-sm font-semibold uppercase tracking-[0.3em] text-cyan">
             What we do
@@ -25,49 +93,35 @@ export default function Services() {
         </p>
       </div>
 
-      <div className="grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/5 sm:grid-cols-2 lg:grid-cols-3">
-        {services.map((service, i) => {
-          const Icon = service.icon;
+      <div className="space-y-16 md:space-y-20">
+        {serviceCategories.map((cat) => {
+          const items = services.filter((s) => s.category === cat.key);
+          if (items.length === 0) return null;
           return (
-            <motion.article
-              key={service.title}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-8%" }}
-              transition={{
-                duration: 0.6,
-                delay: (i % 3) * 0.08,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="group relative overflow-hidden bg-ink-soft p-8 md:p-10"
-            >
-              {/* hover fill sweep */}
-              <span className="absolute inset-0 -z-0 translate-y-full bg-gradient-to-br from-teal to-cyan transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0" />
-
-              <div className="relative z-10 flex h-full flex-col">
-                <div className="mb-8 flex items-center justify-between">
-                  <span className="text-sm font-semibold tabular-nums text-paper/40 transition-colors duration-300 group-hover:text-ink/60">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <Icon
-                    className="h-7 w-7 text-cyan transition-colors duration-300 group-hover:text-ink"
-                    strokeWidth={1.5}
-                  />
-                </div>
-
-                <h3 className="text-2xl font-bold leading-tight tracking-tight transition-colors duration-300 group-hover:text-ink">
-                  {service.title}
+            <div key={cat.key}>
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-6%" }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="mb-8 flex flex-wrap items-baseline gap-x-5 gap-y-1"
+              >
+                <h3 className="text-lg font-bold tracking-tight text-paper md:text-xl">
+                  <span className="gradient-text mr-3 select-none">✦</span>
+                  {cat.label}
                 </h3>
-                <p className="mt-4 flex-1 text-paper/60 transition-colors duration-300 group-hover:text-ink/80">
-                  {service.description}
-                </p>
+                <p className="text-sm text-paper/40">{cat.blurb}</p>
+              </motion.div>
 
-                <ArrowUpRight
-                  className="mt-8 h-6 w-6 text-paper/40 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-ink"
-                  strokeWidth={1.5}
-                />
+              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {items.map((service) => {
+                  const i = counter++;
+                  return (
+                    <ServiceCard key={service.title} service={service} index={i} />
+                  );
+                })}
               </div>
-            </motion.article>
+            </div>
           );
         })}
       </div>

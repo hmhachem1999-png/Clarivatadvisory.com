@@ -24,6 +24,7 @@ export default function Logo({
         width={markSize}
         height={markSize}
         priority
+        loading="eager"
         className="h-auto w-auto"
         style={{ width: markSize, height: markSize }}
       />

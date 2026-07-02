@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { company, navLinks, services } from "@/data/site";
+import { company, navLinks, services, socials } from "@/data/site";
 
 export default function Footer() {
   const year = 2026;
@@ -22,9 +22,16 @@ export default function Footer() {
           </span>
         </Link>
 
-        <div className="mt-16 grid gap-12 border-t border-white/10 pt-12 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="mt-16 grid gap-12 border-t border-white/10 pt-12 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
           <div>
-            <p className="max-w-sm text-paper/60">{company.tagline}</p>
+            <p className="max-w-sm text-lg font-semibold text-paper/80">
+              {company.tagline}
+            </p>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-paper/50">
+              Guided by insight, precision and foresight — we help UAE
+              businesses make informed decisions today that shape a stronger
+              tomorrow.
+            </p>
             <p className="mt-4 max-w-sm text-sm text-paper/40">
               {company.legalName} — {company.license}.
             </p>
@@ -64,6 +71,53 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+          </div>
+
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-paper/40">
+              Contact
+            </h3>
+            <ul className="mt-5 space-y-3 text-paper/80">
+              <li className="text-sm leading-relaxed text-paper/60">
+                {company.address.line1}, {company.address.line2},{" "}
+                {company.address.city}, {company.address.country}
+              </li>
+              <li>
+                <a href={company.phoneHref} className="link-underline">
+                  {company.phone}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${company.email}`}
+                  className="link-underline break-all"
+                >
+                  {company.email}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={company.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-underline"
+                >
+                  WhatsApp
+                </a>
+              </li>
+            </ul>
+            {/* Social profiles — placeholder hrefs until real pages exist */}
+            <div className="mt-6 flex gap-5">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  className="link-underline text-sm font-semibold text-paper/60 hover:text-paper"
+                >
+                  {s.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 

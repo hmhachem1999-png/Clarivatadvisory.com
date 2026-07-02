@@ -247,8 +247,22 @@ export default function Contact() {
                 <p className="text-center text-sm text-red-400">{submitError}</p>
               )}
               <p className="text-center text-xs text-paper/40">
-                We&apos;ll never share your details.
+                Your enquiry will be handled confidentially. We&apos;ll never
+                share your details.
               </p>
+              {company.calendarUrl && (
+                <p className="text-center text-sm text-paper/60">
+                  Prefer to pick a time?{" "}
+                  <a
+                    href={company.calendarUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-underline font-semibold text-cyan"
+                  >
+                    Book a consultation slot
+                  </a>
+                </p>
+              )}
             </form>
           )}
         </Reveal>

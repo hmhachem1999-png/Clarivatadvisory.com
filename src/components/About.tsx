@@ -1,5 +1,6 @@
 import { company, stats } from "@/data/site";
 import RevealText, { Reveal } from "./RevealText";
+import StatValue from "./StatValue";
 
 export default function About() {
   return (
@@ -45,7 +46,7 @@ export default function About() {
             className="bg-ink-soft p-8 md:p-10"
           >
             <div className="gradient-text text-4xl font-extrabold tracking-tight md:text-5xl">
-              {stat.value}
+              <StatValue value={stat.value} />
             </div>
             <div className="mt-3 text-sm text-paper/60">{stat.label}</div>
           </Reveal>

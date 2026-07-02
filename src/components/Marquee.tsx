@@ -15,10 +15,12 @@ export default function Marquee() {
       <div className="marquee-track flex w-max items-center">
         {items.map((word, i) => (
           <span key={i} className="flex items-center">
-            <span className="px-8 text-2xl font-extrabold uppercase tracking-tight text-paper/85 md:text-4xl">
+            <span className="px-8 text-xl font-extrabold uppercase tracking-tight text-paper/80 md:text-3xl">
               {word}
             </span>
-            <span className="text-2xl text-cyan md:text-4xl">&bull;</span>
+            <span className="gradient-text select-none text-lg md:text-2xl">
+              ✦
+            </span>
           </span>
         ))}
       </div>

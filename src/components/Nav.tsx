@@ -55,9 +55,9 @@ export default function Nav() {
         <div className="hidden md:block">
           <Link
             href="/contact"
-            className="rounded-full bg-paper px-6 py-2.5 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-105"
+            className="rounded-full bg-gradient-to-r from-teal to-cyan px-6 py-2.5 text-sm font-semibold text-ink transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(200,161,58,0.35)]"
           >
-            Get in touch
+            Book a consultation
           </Link>
         </div>
 
